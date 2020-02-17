@@ -1,0 +1,35 @@
+version: '2'
+services:
+    backend_web_counter:
+        build: ./backend
+        ports:
+            - "5000:5000"
+        restart: always
+        volumes:
+            - ./backend:/code
+        environment:
+            - REDIS_HOSTNAME=redis
+            - REDIS_PASSWORD=2T9Kf1
+        depends_on:
+            - redis
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        environment:
+            - REDIS_PASSWORD=2T9Kf1
+        command: redis-server --requirepass 2T9Kf1
+        volumes:
+            - ./environment/redis.conf:/usr/local/etc/redis/redis.conf 
+    frontend_web_counter:
+        build: ./frontend
+        volumes:
+            - ./frontend/src:/usr/app/src
+            - ./frontend/package.json:/usr/app/package.json
+            - ./frontend/.env:/usr/app/.env
+        # environment:
+        #     - BACKEND_HOSTNAME=http://backend_web_counter:5000
+        ports:
+            - "3000:3000"
+        links:
+            - backend_web_counter
