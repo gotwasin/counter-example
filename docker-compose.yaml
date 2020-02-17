@@ -27,8 +27,6 @@ services:
             - ./frontend/src:/usr/app/src
             - ./frontend/package.json:/usr/app/package.json
             - ./frontend/.env:/usr/app/.env
-        # environment:
-        #     - BACKEND_HOSTNAME=http://backend_web_counter:5000
         ports:
             - "3000:3000"
         links:
