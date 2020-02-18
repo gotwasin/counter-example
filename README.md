@@ -1,14 +1,16 @@
+#How to use.
+
+Prerequisite
+  - Openshift Cluster.
+  - Registry Console (Incloude on Openshift).
+  - Already install docker.
+
 Getting Start
 
-1. change backend's env in docker-compose that connect to redis
+1. Run docker-compose on your local
 
-environment:
-  - REDIS_HOSTNAME=redis
+docker-compose up -d --build
 
-2. change proxy into frontend/package.json
+2. Go to Openshift Console to deploy Redis from catalog
+Insert your password then next and create
 
-"proxy": "http://backend_web_counter:5000"
-
-3.  Run docker-compose
-
-docker-compose up -d
